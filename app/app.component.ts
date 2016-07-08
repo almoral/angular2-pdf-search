@@ -15,7 +15,7 @@ import {FileList} from './components/file-list'
 
 export class AppComponent{
 
-	update($event){
-		console.log($event);
+	update(term){
+		console.log(term);
 	}
 };

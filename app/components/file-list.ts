@@ -9,7 +9,7 @@ import { MDCRequest } from '../mdc-request';
 	pipes: [SearchPipe],
 	template: `
 	    	<ul>
-    		<li *ngFor="let file of (files | async | search:term)" term ="term"> 
+    		<li *ngFor="let file of (files | async | search:term)"> 
     			<h4><a href="{{file.filePath}}">{{file.label}}</a></h4>
     			<p>{{file.fileSize}}</p>
     		</li>
@@ -31,7 +31,7 @@ export class FileList{
 
 		//console.log(this.pdfService.getFiles(mdcRequest));
 
-		this.files = this.pdfService.getFiles(mdcRequest)//.subscribe(files => this.files = files);
+		this.files = this.pdfService.getFiles(mdcRequest);
 	};
 
 	ngOnInit(){

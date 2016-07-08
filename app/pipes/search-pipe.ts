@@ -6,18 +6,21 @@ import {Pipe} from '@angular/core'
 
 export class SearchPipe{
 
-	tmp = [];
+	//tmp = [];
 
-	transform(value: any, [term]){
+	transform(value: any, term: string){
 	
-		this.tmp.length = 0;
+		//this.tmp.length = 0;
 
 		if(value){
 		
-			let arr = value.filter((item:any) => item.label !== null && item.label.indexOf(term) > -1);
+			console.log(term);
 
-			this.tmp.push(...arr);
-			return this.tmp;
+			return value.filter((item:any) => item.label !== null && item.label.indexOf(term) > -1);
+
+			//this.tmp.push(...arr);
+
+			//return this.tmp;
 		}
 	}
 }
