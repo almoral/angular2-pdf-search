@@ -4,6 +4,7 @@ import {SearchPipe} from '../pipes/search-pipe'
 import { pdfService } from '../pdfs.service';
 import { MDCRequest } from '../mdc-request';
 
+
 @Component({
 	selector: 'file-list',
 	pipes: [SearchPipe],
@@ -14,7 +15,7 @@ import { MDCRequest } from '../mdc-request';
     			<p>{{file.fileSize}}</p>
     		</li>
     	</ul>`,
-    providers: [pdfService, MDCRequest]
+    providers: [MDCRequest]
 }) 
 
 export class FileList{

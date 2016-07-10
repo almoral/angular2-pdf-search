@@ -25,9 +25,9 @@ export class pdfService {
 		let month: string = opts.targetMonth;
 
 
-		//return this.http.get(url + target + '&year=' + year + '&month=' + month).map((res: Response) => res.json());
+		return this.http.get(url + target + '&year=' + year + '&month=' + month).map((res: Response) => res.json());
 
-		return this.http.get('./app/results.js').map((res: Response) => res.json());
+		//return this.http.get('./app/results.js').map((res: Response) => res.json());
 		//console.log("Files: ", PDFS);
 		//return Promise.resolve(PDFS).catch(this.handleError);
 

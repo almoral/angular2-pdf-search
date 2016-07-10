@@ -4,4 +4,7 @@ import { AppComponent } from './app.component';
 
 import {HTTP_PROVIDERS} from '@angular/http'
 
-bootstrap(AppComponent, [HTTP_PROVIDERS]);
+import {pdfService} from './pdfs.service'
+
+
+bootstrap(AppComponent, [HTTP_PROVIDERS, pdfService]);
