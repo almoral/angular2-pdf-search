@@ -1,7 +1,21 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {SearchBox} from './components/search-box'
+import {FileList} from './components/file-list'
+
 
 @Component({
     selector: 'my-app',
-    template: '<h1>My First Angular 2 App</h1>'
+    directives: [SearchBox, FileList],
+    template: `
+    	<search-box (update)="term = $event"></search-box>
+		<file-list [term]="term"></file-list>
+    `
 })
-export class AppComponent { }
+
+
+export class AppComponent{
+
+	update(term){
+		console.log(term);
+	}
+};
