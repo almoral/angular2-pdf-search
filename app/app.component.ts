@@ -1,21 +1,50 @@
-import {Component} from '@angular/core';
+import {Component, Output, OnInit} from '@angular/core';
 import {SearchBox} from './components/search-box'
 import {FileList} from './components/file-list'
-
+import { pdfService } from './pdfs.service';
+import { MDCRequest } from './mdc-request';
+import {YearSelect} from './components/year-selector'
 
 @Component({
     selector: 'my-app',
-    directives: [SearchBox, FileList],
+    directives: [YearSelect, SearchBox, FileList],
     template: `
+    	<year-select [files] = "files"></year-select>
     	<search-box (update)="term = $event"></search-box>
-		<file-list [term]="term"></file-list>
-    `
+		<file-list  [fileList]="files" [term]="term"></file-list>
+    `,
+    providers: [MDCRequest]
 })
 
 
-export class AppComponent{
+export class AppComponent implements OnInit{
 
-	update(term){
-		console.log(term);
+	public files:any;
+	//public yearList: any;
+
+	constructor(private pdfService: pdfService, private mdcRequest: MDCRequest){}
+
+	ngOnInit(){
+
+		let opts:MDCRequest = {
+			url: 'http://www.miamidade.gov/mayor/searchApp/searchHandler.ashx?',
+			targetFolder: 'memos-and-reports',
+			targetYear: '',
+			targetMonth: ''
+		}
+
+
+		this.files = this.pdfService.getFiles(opts).getValue();
+
+		//this.yearList = this.files;
+
 	}
+
+	//getYears(items:any){
+//
+	//	//console.log(items);
+	//	return [...new Set(items.map(item => item.year))];
+//
+	//}
+
 };
