@@ -1,16 +1,22 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
-
+import { UniqueValuesPipe } from '../pipes/uniques-pipe'
 
 @Component({
 	selector: 'year-select',
-	template: `<div class="year-select-container">
+	pipes: [UniqueValuesPipe],
+	template: `
 					<select #select (select)="selectYear.emit(select.value)" class="year-select">
-					<option value="{{file.year}}">{{file.year}}</option>
+					<option value="">Select a year</option>
+					<option *ngFor="let item of (files | async | uniques:item)" value="{{item}}">{{item}}</option>
 					</select>`
 })
 
 export class YearSelect{
-	@Input() select = "";
+	@Input() files = "";
 	@Output() selectYear = new EventEmitter();
+
+
+	constructor(){}
+
 
 }
