@@ -1,13 +1,14 @@
 import {Component, Input} from '@angular/core'
 import {SearchPipe} from '../pipes/search-pipe'
+import {SearchByYearPipe} from '../pipes/search-year-pipe'
 
 
 @Component({
 	selector: 'file-list',
-	pipes: [SearchPipe],
+	pipes: [SearchPipe, SearchByYearPipe],
 	template: `
 	    	<ol>
-    		<li *ngFor="let file of (fileList | async | search:term)"> 
+    		<li *ngFor="let file of (fileList | async | search:term | searchByYear:selectedYear )"> 
     			<p><a href="{{file.filePath}}">{{file.label}}</a> <span>{{file.fileSize}}</span></p>
     		</li>
     	</ol>`
@@ -16,6 +17,8 @@ import {SearchPipe} from '../pipes/search-pipe'
 export class FileList{
 
 	@Input() term:string;
+
+	@Input() selectedYear: string;
 
 	@Input() fileList: any;
 

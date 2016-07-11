@@ -9,7 +9,7 @@ import {YearSelect} from './components/year-selector'
     selector: 'my-app',
     directives: [YearSelect, SearchBox, FileList],
     template: `
-    	<year-select [files] = "files" ></year-select>
+    	<year-select [files] = "files"></year-select>
     	<search-box (update)="term = $event"></search-box>
 		<file-list  [fileList]="files" [term]="term"></file-list>
     `,

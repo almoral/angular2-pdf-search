@@ -12,18 +12,18 @@ export class UniqueValuesPipe{
 	  	let tempArray = [];
 	  	let unique = {};
 
-	  		for(var i in items){
+  		for(var i in items){
 
-        		if(typeof(unique[items[i].year]) == "undefined"){
-        			tempArray.push(items[i].year)
-        		}
+    		if(typeof(unique[items[i].year]) == "undefined"){
+    			
+    			if(items[i].year !== null && items[i].year.length > 0)
+    				tempArray.push(items[i].year)
+    		}
 
-        		unique[items[i].year] = 0;
-	  		}
-
+    		unique[items[i].year] = 0;
+  		}
 
 	  	return tempArray;
-	  	//return items.filter(item => item.year.indexOf(item[0]) !== -1);
 	  }
     };
 }
