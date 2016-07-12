@@ -5,7 +5,7 @@ import { UniqueValuesPipe } from '../pipes/uniques-pipe'
 	selector: 'year-select',
 	pipes: [UniqueValuesPipe],
 	template: `
-					<select (select)="onChange($event.target.value)" class="year-select">
+					<select #selectedYear (change)="onChange($event.target.value)" class="year-select">
 					<option value=''>Please Select a Year</option>
 					<option *ngFor="let item of (files | async | uniques:item)" value="{{item}}">{{item}}</option>
 					</select>`
@@ -13,16 +13,16 @@ import { UniqueValuesPipe } from '../pipes/uniques-pipe'
 
 export class YearSelect{
 	@Input() files = "";
-	@Output() select = new EventEmitter();
+	@Output() change = new EventEmitter();
 
 
-	onChange(selectedValue){
+	onChange(selectedValue: string){
 		console.log('selected value: ', selectedValue);
-		this.select.emit(selectedValue);
+		this.change.emit(selectedValue);
 	}
 
 	ngOnInit(){
-		this.select.emit('2011');
+		this.change.emit("2011");
 	}
 
 }

@@ -13,9 +13,9 @@ export class SearchByYearPipe{
 
 		if(value){
 		
-			console.log("Selected year: ", selectedYear);
+			//console.log("Selected year: ", selectedYear);
 
-			return value.filter((item:any) => item.label !== null && item.label.indexOf(selectedYear) > -1);
+			return value.filter((item:any) => item.year !== null && item.year.indexOf(selectedYear) > -1);
 		}
 	}
 }
