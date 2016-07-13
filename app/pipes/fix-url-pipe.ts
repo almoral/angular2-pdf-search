@@ -10,7 +10,6 @@ export class FixUrl{
 
      //Remove inetpub/WWW/
 
-     //let correctUrl: string = "";
 
      let domain:string = value.substring(0, value.indexOf('inetpub'));
 
