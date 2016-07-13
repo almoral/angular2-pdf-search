@@ -6,7 +6,7 @@ import {Pipe} from '@angular/core'
 
 export class UniqueValuesPipe{
 
-	  transform(items: any[] = []){
+	  transform(items: any[] = [], sortParam: string = ""){
 
      //if(items !== null && items !== undefined){
 	  	let tempArray:string[] = [];
@@ -14,7 +14,7 @@ export class UniqueValuesPipe{
       
       //let params = sortParam;
 
-     //console.log("Sort parameters: ", params);
+     console.log("Sort parameters: ", sortParam);
 
   		for(var i in items){
 

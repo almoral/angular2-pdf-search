@@ -8,7 +8,7 @@ import { UniqueValuesPipe } from '../pipes/uniques-pipe'
 	`
 		<select #selectedYear (change)="onChange(selectedYear.value)" class="year-select">
 		<option value=''>Please Select a Year</option>
-		<option *ngFor="let item of (files | async | uniques:item)" value="{{item}}">{{item}}</option>
+		<option *ngFor="let item of (files | async | uniques:item:'year')" value="{{item}}">{{item}}</option>
 		</select>
 	`
 })
