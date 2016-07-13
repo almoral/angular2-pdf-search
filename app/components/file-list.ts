@@ -1,52 +1,31 @@
 import {Component, Input} from '@angular/core'
 import {SearchPipe} from '../pipes/search-pipe'
-//import { Pdf } from '../pdf';
-import { pdfService } from '../pdfs.service';
-import { MDCRequest } from '../mdc-request';
+import {SearchByYearPipe} from '../pipes/search-year-pipe'
 
 
 @Component({
 	selector: 'file-list',
-	pipes: [SearchPipe],
+	pipes: [SearchPipe, SearchByYearPipe],
 	template: `
-	    	<ul>
-    		<li *ngFor="let file of (files | async | search:term)"> 
-    			<h4><a href="{{file.filePath}}">{{file.label}}</a></h4>
-    			<p>{{file.fileSize}}</p>
+	    	<ol>
+    		<li *ngFor="let file of (fileList | async | search:term:selectedYear)"> 
+    			<p><a href="{{file.filePath}}">{{file.label}}</a> <span>{{file.fileSize}}</span></p>
     		</li>
-    	</ul>`,
-    providers: [MDCRequest]
+    	</ol>`
 }) 
 
 export class FileList{
 
 	@Input() term:string;
 
-	files: any;
+	@Input() selectedYear: string;
 
-	constructor(private pdfService: pdfService, private mdcRequest: MDCRequest){
+	@Input() fileList: any;
+
+	constructor(){
 		
 	}
 
-	getFiles(mdcRequest: MDCRequest) {
-
-		//console.log(this.pdfService.getFiles(mdcRequest));
-
-		this.files = this.pdfService.getFiles(mdcRequest);
-	};
-
-	ngOnInit(){
-
-		let opts:MDCRequest = {
-			url: 'http://www.miamidade.gov/mayor/searchApp/searchHandler.ashx?',
-			targetFolder: 'memos-and-reports',
-			targetYear: '',
-			targetMonth: ''
-		}
-
-		this.getFiles(opts);
-
-	}
 
 }
 

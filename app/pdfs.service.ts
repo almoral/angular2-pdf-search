@@ -1,12 +1,11 @@
 import { Http, Response } from '@angular/http'
 import { Injectable } from '@angular/core'
-//import 'rxjs/Rx';
-import { Pdf } from './pdf';
-//import { PDFS } from './results';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw'
+import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/map'
 import { MDCRequest } from './mdc-request'
+import {BehaviorSubject} from 'rxjs/Rx'
 
 @Injectable()
 
@@ -15,7 +14,7 @@ export class pdfService {
 
 	constructor(private http:Http){};
 
-	getFiles(options: MDCRequest){
+	_getFiles(options: MDCRequest){
 
 
 		let opts = options;
@@ -24,13 +23,14 @@ export class pdfService {
 		let year: string = opts.targetYear;
 		let month: string = opts.targetMonth;
 
+		return this.http.get(url + target + '&year=' + year + '&month=' + month).map((res: Response) => res.json()).catch(this.handleError);
+	}
 
-		return this.http.get(url + target + '&year=' + year + '&month=' + month).map((res: Response) => res.json());
+	getFiles(opts: MDCRequest){
 
-		//return this.http.get('./app/results.js').map((res: Response) => res.json());
-		//console.log("Files: ", PDFS);
-		//return Promise.resolve(PDFS).catch(this.handleError);
+		let behaviorSubject: BehaviorSubject = new BehaviorSubject(this._getFiles(opts));
 
+		return behaviorSubject;
 	}
 
 	private handleError (error: any){
