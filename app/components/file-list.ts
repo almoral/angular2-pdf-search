@@ -8,7 +8,7 @@ import {SearchByYearPipe} from '../pipes/search-year-pipe'
 	pipes: [SearchPipe, SearchByYearPipe],
 	template: `
 	    	<ol>
-    		<li *ngFor="let file of (fileList | async | search:term | searchByYear:selectedYear )"> 
+    		<li *ngFor="let file of (fileList | async | search:term:selectedYear)"> 
     			<p><a href="{{file.filePath}}">{{file.label}}</a> <span>{{file.fileSize}}</span></p>
     		</li>
     	</ol>`

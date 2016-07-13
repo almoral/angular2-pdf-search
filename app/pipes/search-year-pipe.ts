@@ -6,16 +6,14 @@ import {Pipe} from '@angular/core'
 
 export class SearchByYearPipe{
 
-	//tmp = [];
-
-	transform(value: any, selectedYear: string){
+	transform(value: any, selectedYear:any){
 
 
-		if(value){
+		if(value && selectedYear){
 		
-			//console.log("Selected year: ", selectedYear);
+			console.log("Selected year: ", selectedYear.path[0].value);
 
-			return value.filter((item:any) => item.year !== null && item.year.indexOf(selectedYear) > -1);
+			return value.filter((item:any) => item.year !== null && item.year === selectedYear.path[0].value);
 		}
 	}
 }

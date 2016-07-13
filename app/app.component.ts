@@ -8,10 +8,11 @@ import {YearSelect} from './components/year-selector'
 @Component({
     selector: 'my-app',
     directives: [YearSelect, SearchBox, FileList],
-    template: `
-    	<year-select [files] = "files"></year-select>
+    template: 
+    `
+    	<year-select [files] = "files" (change)="selectedYear = $event"></year-select>
     	<search-box (update)="term = $event"></search-box>
-		<file-list  [fileList]="files" [term]="term"></file-list>
+		<file-list  [fileList]="files" [term]="term" [selectedYear]="selectedYear"></file-list>
     `,
     providers: [MDCRequest]
 })
@@ -20,7 +21,7 @@ import {YearSelect} from './components/year-selector'
 export class AppComponent implements OnInit{
 
 	public files:any;
-	//public yearList: any;
+	//public year:string;
 
 	constructor(private pdfService: pdfService, private mdcRequest: MDCRequest){}
 
