@@ -8,7 +8,7 @@ import {FixUrl} from '../pipes/fix-url-pipe'
 	pipes: [SearchPipe, SearchByYearPipe, FixUrl],
 	template: `
 	    	<ol>
-    		<li *ngFor="let file of (fileList | async | search:term:selectedYear)"> 
+    		<li *ngFor="let file of (fileList | async | search:term:selectedYear:selectedMonth)"> 
     			<p><a href="{{file.filePath | fixUrl}}">{{file.label}}</a> <span>{{file.fileSize}}</span></p>
     		</li>
     	</ol>`
@@ -19,6 +19,8 @@ export class FileList{
 	@Input() term:string;
 
 	@Input() selectedYear: string;
+
+	@Input() selectedMonth: string;
 
 	@Input() fileList: any;
 

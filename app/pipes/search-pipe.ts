@@ -6,26 +6,45 @@ import {Pipe} from '@angular/core'
 
 export class SearchPipe{
 
-	//tmp = [];
 
-	transform(value: any, term="", selectedYear:any){
+	transform(value: any, term:string, selectedYear:any, selectedMonth:any){
+
 
 		if(value){
 			
-			if(term.length > 0 && !selectedYear){
+			if(!selectedYear && !selectedMonth){
 			
 				return value.filter((item:any) => item.label !== null && item.label.toLowerCase().indexOf(term.toLowerCase()) > -1);
 
 			} 
 		
-			if(selectedYear.target.value !== '' && term.length == 0) {
-			
+			if(!selectedYear && !selectedMonth) {
+
 				return value.filter((item:any) => item.year !== null && item.year == selectedYear.path[0].value);
 			}
+
 		
-			if(selectedYear.target.value !== '' && term.length > 0){
+			if(selectedYear && !selectedMonth){
 
 				return value.filter((item:any) => item.year !== null && item.year == selectedYear.path[0].value && item.label.toLowerCase().indexOf(term.toLowerCase()) > -1);
+
+			}
+
+			if(selectedYear && selectedMonth){
+
+				return value.filter((item:any) => item.year !== null && item.year == selectedYear.path[0].value && item.label.toLowerCase().indexOf(term.toLowerCase()) > -1 && item.monthLabel == selectedMonth.path[0].value);
+
+			}
+
+			if(!selectedYear && selectedMonth){
+
+				return value.filter((item:any) => item.year !== null && item.monthLabel == selectedMonth.path[0].value);
+
+			}
+
+			if(selectedYear && selectedMonth){
+
+				return value.filter((item:any) => item.year !== null && item.label.toLowerCase().indexOf(term.toLowerCase()) > -1 && item.monthLabel == selectedMonth.path[0].value);
 
 			}
 

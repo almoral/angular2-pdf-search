@@ -4,15 +4,17 @@ import {FileList} from './components/file-list'
 import { pdfService } from './pdfs.service';
 import { MDCRequest } from './mdc-request';
 import {YearSelect} from './components/year-selector'
+import {MonthSelect} from './components/month-selector'
 
 @Component({
     selector: 'my-app',
-    directives: [YearSelect, SearchBox, FileList],
+    directives: [YearSelect, MonthSelect, SearchBox, FileList],
     template: 
     `
     	<year-select [files] = "files" (change)="selectedYear = $event"></year-select>
+    	<month-select [months] = "months" (change)="selectedMonth = $event"></month-select>
     	<search-box (update)="term = $event"></search-box>
-		<file-list  [fileList]="files" [term]="term" [selectedYear]="selectedYear"></file-list>
+		<file-list  [fileList]="files" [term]="term" [selectedYear]="selectedYear" [selectedMonth]="selectedMonth" ></file-list>
     `,
     providers: [MDCRequest]
 })
@@ -21,7 +23,7 @@ import {YearSelect} from './components/year-selector'
 export class AppComponent implements OnInit{
 
 	public files:any;
-	//public year:string;
+	public months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 	constructor(private pdfService: pdfService, private mdcRequest: MDCRequest){}
 
